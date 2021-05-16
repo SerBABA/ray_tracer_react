@@ -1,24 +1,27 @@
-import { Hit, Ray } from "./Ray";
+import { Ray } from "./Ray";
 import { Direction, Point, Vector3 } from "./Vector3";
 
 export interface SceneObject {
-  getClosestPointOfIntesection(ray: Ray): Hit | null;
-  normal(Point: Point): Direction;
+  color: Vector3;
+
+  getClosestPointOfIntesection(ray: Ray): number | null;
+  normal(Point: Point | Vector3): Direction;
   getReflectionCoefficient(): number;
   getSpecularColor(): Vector3;
+  setColor(r: number, g: number, b: number): void;
 }
 
 export class SphereObject implements SceneObject {
   radius: number;
   center: Point;
-  colorRGB: Vector3 = new Vector3(0.2, 0.2, 0.2);
+  color: Vector3 = new Vector3(0.2, 0.2, 0.2);
 
   constructor(center: Point, radius: number) {
     this.center = center;
     this.radius = radius;
   }
 
-  normal(surfacePoint: Point): Direction {
+  normal(surfacePoint: Point | Vector3): Direction {
     const res = surfacePoint.minus(this.center);
     const dir = new Direction(res.x, res.y, res.z);
     dir.normalize();
@@ -26,12 +29,12 @@ export class SphereObject implements SceneObject {
   }
 
   setColor(r: number, g: number, b: number) {
-    this.colorRGB.x = r;
-    this.colorRGB.y = g;
-    this.colorRGB.z = b;
+    this.color.x = r;
+    this.color.y = g;
+    this.color.z = b;
   }
 
-  getClosestPointOfIntesection(ray: Ray): Hit | null {
+  getClosestPointOfIntesection(ray: Ray): number | null {
     // Saving on computation time
     const temp = ray.source.minus(this.center);
     const s: Direction = new Direction(temp.x, temp.y, temp.z);
@@ -51,7 +54,7 @@ export class SphereObject implements SceneObject {
     // Calculating the roots
     const t1 = -sDotD + Math.sqrt(sqrtInside);
     const t2 = -sDotD - Math.sqrt(sqrtInside);
-    let t;
+    let t = null;
 
     // If either are below zero. This means that the ray is being shot from within the sphere or it is behind the camera.
     if (t1 < 0 || t2 < 0) {
@@ -63,16 +66,14 @@ export class SphereObject implements SceneObject {
       t = Math.min(t1, t2);
     }
 
-    const hitPoint = new Hit(ray.source.add(ray.direction.multiply(t)), ray);
-    hitPoint.setColor(this.colorRGB.x, this.colorRGB.y, this.colorRGB.z);
-    return hitPoint;
+    return t;
   }
 
   getReflectionCoefficient() {
-    return 1.5;
+    return 3.5;
   }
 
   getSpecularColor() {
-    return new Vector3(0.1, 0.1, 0.1);
+    return new Vector3(0.07, 0.07, 0.07);
   }
 }

@@ -47,9 +47,19 @@ export class Point extends Vector3 {
   setColor(r: number, g: number, b: number) {
     this.color = new Vector3(r, g, b);
   }
+
+  setColorVEC(vec3RGB: Vector3) {
+    this.color.x = vec3RGB.x;
+    this.color.y = vec3RGB.y;
+    this.color.z = vec3RGB.z;
+  }
 }
 
 export class Direction extends Vector3 {
+  get Distance() {
+    return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
+  }
+
   flip(): Direction {
     return new Direction(-this.x, -this.y, -this.z);
   }

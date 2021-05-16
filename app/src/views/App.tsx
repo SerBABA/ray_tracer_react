@@ -5,10 +5,10 @@ import { Point } from "../helpers/Vector3";
 import "./../styling/App.css";
 
 // Constants
-const X_SIZE_DEFAULT: number = 100;
-const Y_SIZE_DEFAULT: number = 100;
-const EDIST = 40;
-const LIGHT_POS = new Point(10, 10, 10);
+const X_SIZE_DEFAULT: number = 200;
+const Y_SIZE_DEFAULT: number = 200;
+const EDIST = 400;
+const LIGHT_POS = new Point(100, 100, -200);
 LIGHT_POS.setColor(1, 1, 1);
 
 // Types

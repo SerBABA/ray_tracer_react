@@ -51,7 +51,7 @@ function Pixel(props: PixelProps) {
   rayDirection.normalize();
 
   // Firing the ray and gettting the colour
-  const traceRay: Ray = new Ray(props.viewSource, rayDirection, 1);
+  const traceRay: Ray = new Ray(props.viewSource, rayDirection);
   const color = traceRay.trace(props.sceneObjects, props.ambientColor, props.lightPos);
 
   return (

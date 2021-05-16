@@ -12,9 +12,19 @@ export type ViewPlaneProps = {
 };
 
 // Constants
-const sphere1 = new SphereObject(new Point(0, 0, -90), 70);
+const sphere1 = new SphereObject(new Point(0, 0, -350), 50);
 sphere1.setColor(1, 0.2, 1);
-const SCENE_OBJECTS: SceneObject[] = [sphere1];
+
+const sphere2 = new SphereObject(new Point(40, 40, -280), 15);
+sphere2.setColor(0.2, 1, 1);
+
+const sphere3 = new SphereObject(new Point(30, -30, -280), 22);
+sphere3.setColor(0, 0, 1);
+
+const sphere4 = new SphereObject(new Point(-30, -40, -280), 22);
+sphere4.setColor(0.5, 1, 0);
+
+const SCENE_OBJECTS: SceneObject[] = [sphere1, sphere2, sphere3, sphere4];
 
 function ViewPlane(props: ViewPlaneProps) {
   const [grideState, setGrideState] = useState<Coords[]>([]);
