@@ -1,6 +1,8 @@
 # ray_tracer_react
 Simple ray tracer experiment.
 
+![ray-tracer](https://user-images.githubusercontent.com/32250073/133347178-629246b9-9330-448d-82c5-d4a9cde81043.png)
+
 ### Steps to run
 
 - clone repository.
